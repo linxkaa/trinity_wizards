@@ -23,7 +23,7 @@ class MainContactState with _$MainContactState {
   }
 
   List<ContactEntity> addNewContact(ContactEntity entity) {
-    final newModel = [...model, entity];
+    final newModel = [...model, entity.copyWith(id: Random().nextInt(1000).toString())];
     return newModel;
   }
 

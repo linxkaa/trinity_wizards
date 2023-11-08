@@ -69,7 +69,7 @@ class MainPage extends StatelessWidget {
                                   : state.model.length, (index) {
                             late ContactEntity data;
 
-                            if (state.modelFiltered.isNotEmpty) {
+                            if (context.read<MainContactCubit>().searchController.text.isNotEmpty) {
                               data = state.modelFiltered[index];
                             } else {
                               data = state.model[index];
