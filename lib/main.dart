@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trinity_wizards/application/main_contact_cubit/main_contact_cubit.dart';
 import 'package:trinity_wizards/core/commons/theme.dart';
 import 'package:trinity_wizards/core/injection/injection.dart';
 import 'package:trinity_wizards/core/routes/app_router.dart';
@@ -22,23 +23,26 @@ class TrinityWizardsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final router = getIt<AppRouter>();
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-          currentFocus.focusedChild!.unfocus();
-        }
-      },
-      child: ScreenUtilInit(
-        designSize: const Size(360, 640),
-        builder: () {
-          return MaterialApp.router(
-            theme: AppTheme.theme,
-            darkTheme: AppTheme.theme,
-            routerDelegate: AutoRouterDelegate(router),
-            routeInformationParser: router.defaultRouteParser(),
-          );
+    return BlocProvider(
+      create: (context) => getIt<MainContactCubit>(),
+      child: GestureDetector(
+        onTap: () {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+            currentFocus.focusedChild!.unfocus();
+          }
         },
+        child: ScreenUtilInit(
+          designSize: const Size(360, 640),
+          builder: () {
+            return MaterialApp.router(
+              theme: AppTheme.theme,
+              darkTheme: AppTheme.theme,
+              routerDelegate: AutoRouterDelegate(router),
+              routeInformationParser: router.defaultRouteParser(),
+            );
+          },
+        ),
       ),
     );
   }

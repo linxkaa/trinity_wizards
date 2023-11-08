@@ -17,20 +17,20 @@ class AppTheme {
       decorationColor: ColorConstant.black,
     ),
     appBarTheme: AppBarTheme(
-      toolbarHeight: UIHelper.setSp(70),
+      toolbarHeight: UIHelper.setSp(50),
       color: Colors.white,
       actionsIconTheme: const IconThemeData(color: Colors.black),
       iconTheme: const IconThemeData(color: Colors.black),
       titleTextStyle: GoogleFonts.poppins().copyWith(
-        color: ColorConstant.black,
+        color: Colors.black,
         fontWeight: FontWeight.bold,
         fontSize: UIHelper.setSp(17),
       ),
       shadowColor: ColorConstant.lightGrey.withOpacity(0.2),
     ),
     iconTheme: IconThemeData(
-      color: Colors.black,
-      size: UIHelper.setFont(15),
+      color: ColorConstant.primary,
+      size: UIHelper.setFont(25),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -44,7 +44,7 @@ class AppTheme {
           if (states.contains(MaterialState.disabled)) {
             return ColorConstant.grey; // Disabled color
           }
-          return ColorConstant.lightBlue; // Regular color
+          return ColorConstant.lightGrey; // Regular color
         }),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(UIHelper.padding(vertical: 12, horizontal: 50)),
         elevation: MaterialStateProperty.all<double>(0),

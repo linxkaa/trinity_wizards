@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:trinity_wizards/core/commons/colors_const.dart';
 import 'package:trinity_wizards/presentation/widgets/atoms/text_theme_extension.dart';
 
@@ -145,15 +144,4 @@ class UIHelper {
   }
 
   static double defaultPadding = 28.0;
-
-  static void showToast(String message, {bool isSuccess = false}) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: isSuccess ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: isSuccess ? Colors.green : Colors.red,
-        textColor: Colors.white,
-        fontSize: UIHelper.setFont(14));
-  }
 }

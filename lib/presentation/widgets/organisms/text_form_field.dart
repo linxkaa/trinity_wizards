@@ -14,6 +14,7 @@ class TextFormFieldCustom extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? title;
   final Widget? preffixIcon;
+  final TextInputAction? textInputAction;
 
   const TextFormFieldCustom({
     Key? key,
@@ -25,6 +26,7 @@ class TextFormFieldCustom extends StatelessWidget {
     this.validator,
     this.title,
     this.preffixIcon,
+    this.textInputAction,
   }) : super(key: key);
 
   @override
@@ -39,54 +41,55 @@ class TextFormFieldCustom extends StatelessWidget {
         TextFormField(
           textAlignVertical: TextAlignVertical.center,
           keyboardType: keyboardType,
+          textInputAction: textInputAction,
           textAlign: textAlign ?? TextAlign.left,
           controller: controller,
           autovalidateMode: AutovalidateMode.always,
-          style: style ?? context.textTheme.bodyLarge,
+          style: style ?? context.textTheme.bodyMedium,
           validator: validator,
           decoration: InputDecoration(
             prefixIconColor: ColorConstant.primary,
             prefixIcon: preffixIcon,
             prefixIconConstraints: BoxConstraints(minWidth: UIHelper.setSp(50)),
             hintText: hintText,
-            contentPadding: UIHelper.padding(vertical: 15, horizontal: 10),
+            contentPadding: UIHelper.padding(vertical: 5, horizontal: 5),
             errorStyle: context.textTheme.bodySmall!.copyWith(color: Colors.red),
             isDense: true,
-            prefixStyle: context.textTheme.bodyLarge!,
+            prefixStyle: context.textTheme.bodyMedium!,
             filled: true,
             fillColor: ColorConstant.whiteColor,
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(UIHelper.setWidth(10)),
+              borderRadius: BorderRadius.circular(UIHelper.setWidth(5)),
               borderSide: const BorderSide(
                 color: ColorConstant.primary,
               ),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(UIHelper.setWidth(10)),
+              borderRadius: BorderRadius.circular(UIHelper.setWidth(5)),
               borderSide: BorderSide(
                 color: ColorConstant.grey.withOpacity(0.8),
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(UIHelper.setWidth(10)),
+              borderRadius: BorderRadius.circular(UIHelper.setWidth(5)),
               borderSide: const BorderSide(
                 color: Colors.red,
               ),
             ),
             errorMaxLines: 2,
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(UIHelper.setFont(10)),
+              borderRadius: BorderRadius.circular(UIHelper.setFont(5)),
               borderSide: const BorderSide(
                 color: Colors.red,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(UIHelper.setFont(10)),
+              borderRadius: BorderRadius.circular(UIHelper.setFont(5)),
               borderSide: BorderSide(
                 color: ColorConstant.grey.withOpacity(0.7),
               ),
             ),
-            hintStyle: context.textTheme.bodyLarge!.copyWith(color: ColorConstant.grey.withOpacity(0.7)),
+            hintStyle: context.textTheme.bodyMedium!.copyWith(color: ColorConstant.grey.withOpacity(0.7)),
           ),
         ),
       ],
