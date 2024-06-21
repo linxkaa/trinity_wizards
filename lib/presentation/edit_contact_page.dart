@@ -65,6 +65,7 @@ class EditContactPage extends StatelessWidget {
                   ],
                 ),
                 body: SingleChildScrollView(
+                  padding: UIHelper.padding(vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

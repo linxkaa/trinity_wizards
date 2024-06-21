@@ -56,58 +56,61 @@ class MainPage extends StatelessWidget {
                         ),
                       ),
                     Expanded(
-                      child: Padding(
-                        padding: UIHelper.padding(vertical: 10, horizontal: 15),
-                        child: GridView.count(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 1.3,
-                          children: List.generate(
-                              context.read<MainContactCubit>().searchController.text.isNotEmpty
-                                  ? state.modelFiltered.length
-                                  : state.model.length, (index) {
-                            late ContactEntity data;
+                      child: context.read<MainContactCubit>().searchController.text.isNotEmpty &&
+                              state.modelFiltered.isEmpty
+                          ? const Text('No Contacts Found')
+                          : Padding(
+                              padding: UIHelper.padding(vertical: 10, horizontal: 15),
+                              child: GridView.count(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: 1.3,
+                                children: List.generate(
+                                    context.read<MainContactCubit>().searchController.text.isNotEmpty
+                                        ? state.modelFiltered.length
+                                        : state.model.length, (index) {
+                                  late ContactEntity data;
 
-                            if (context.read<MainContactCubit>().searchController.text.isNotEmpty) {
-                              data = state.modelFiltered[index];
-                            } else {
-                              data = state.model[index];
-                            }
+                                  if (context.read<MainContactCubit>().searchController.text.isNotEmpty) {
+                                    data = state.modelFiltered[index];
+                                  } else {
+                                    data = state.model[index];
+                                  }
 
-                            return InkWell(
-                              onTap: () {
-                                AutoRouter.of(context).push(EditContactRoute(entity: data));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: ColorConstant.lightGrey,
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: UIHelper.setSp(50),
-                                      height: UIHelper.setSp(50),
+                                  return InkWell(
+                                    onTap: () {
+                                      AutoRouter.of(context).push(EditContactRoute(entity: data));
+                                    },
+                                    child: Container(
                                       decoration: BoxDecoration(
-                                        color: ColorConstant.primary,
-                                        borderRadius: UIHelper.borderRadiusCircular(all: 50),
+                                        border: Border.all(
+                                          color: ColorConstant.lightGrey,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: UIHelper.setSp(50),
+                                            height: UIHelper.setSp(50),
+                                            decoration: BoxDecoration(
+                                              color: ColorConstant.primary,
+                                              borderRadius: UIHelper.borderRadiusCircular(all: 50),
+                                            ),
+                                          ),
+                                          UIHelper.verticalSpace(10),
+                                          Text(
+                                            '${data.firstName} ${data.lastName}',
+                                            style: context.textTheme.headlineSmall,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    UIHelper.verticalSpace(10),
-                                    Text(
-                                      '${data.firstName} ${data.lastName}',
-                                      style: context.textTheme.headlineSmall,
-                                    ),
-                                  ],
-                                ),
+                                  );
+                                }),
                               ),
-                            );
-                          }),
-                        ),
-                      ),
+                            ),
                     ),
                   ],
                 );

@@ -16,9 +16,10 @@ class MainContactState with _$MainContactState {
       );
 
   List<ContactEntity> updateContact(ContactEntity entity) {
-    final newModel = [...model]
-      ..removeWhere((element) => element.id == entity.id)
-      ..add(entity);
+    final newModel = [...model];
+    final newEntity = newModel.singleWhere((element) => element.id == entity.id);
+    final index = newModel.indexOf(newEntity);
+    newModel[index] = entity;
     return newModel;
   }
 
@@ -30,7 +31,7 @@ class MainContactState with _$MainContactState {
   List<ContactEntity> filterContact(String query) {
     final filteredList = model
         .where((element) =>
-            element.firstName.toLowerCase().contains(query) || element.lastName.toLowerCase().contains(query))
+            '${element.firstName.toLowerCase()} ${element.lastName.toLowerCase()}'.contains(query.toLowerCase()))
         .toList();
     return filteredList;
   }
